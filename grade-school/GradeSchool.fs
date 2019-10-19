@@ -2,10 +2,20 @@
 
 type School = Map<int, string list>
 
-let empty: School = failwith "You need to implement this function."
+let empty: School = Map.empty<int, string list> 
 
-let add (student: string) (grade: int) (school: School): School = failwith "You need to implement this function."
+let roster (school: School): string list = 
+     school 
+     |> Map.toList
+     |> List.collect snd
 
-let roster (school: School): string list = failwith "You need to implement this function."
+let grade (number: int) (school: School): string list = 
+    match school |> Map.tryFind number with
+        | Some(g) -> g
+        | None -> []
+        |> List.sort
 
-let grade (number: int) (school: School): string list = failwith "You need to implement this function."
+let add (student: string) (grd: int) (school: School): School = 
+    let newList = student :: (school |> grade grd) |> List.sort
+    
+    school |> Map.add grd newList
