@@ -1,18 +1,15 @@
 ﻿module QueenAttack
 
-let coherceRange value = 
-    match value with
-    | value when value < 0 -> false
-    | value when value > 7 -> false
-    | _ -> true
+let coherceRange value = value >= 0 && value <= 7
 
-let create position = 
+let create position =
     let x, y = position
-    coherceRange(x) && coherceRange(y)
+    coherceRange x && coherceRange y
 
-let canAttack white black = 
-    let sameRow = fst white = fst black
-    let sameColumn = snd white = snd black
-    let sameDiagonal = abs(fst black - fst white) = abs (snd black - snd white)
+let canAttack white black =
+    let whiteRow, whiteColumn = white
+    let blackRow, blackColumn = black
 
-    sameRow || sameColumn || sameDiagonal
+    whiteRow = blackRow             // same row
+    || whiteColumn = blackColumn    // same column 
+    || abs (blackRow - whiteRow) = abs (blackColumn - whiteColumn) // same diagonal
