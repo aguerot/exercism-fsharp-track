@@ -1,6 +1,10 @@
 ﻿module Accumulate
 
-let rec accumulate (func: 'a -> 'b) (input: 'a list): 'b list = 
-    match input with
-        | [] -> []      // quit when all processed
-        | item :: remaining -> (func item) :: (accumulate func remaining) // extract first item , apply and process remaining
+let accumulate fn xs =
+    let rec applyAccumulation fn xs acc =
+        match xs with
+        | [] -> acc
+        | head :: tail -> applyAccumulation fn tail (fn head :: acc)
+
+    applyAccumulation fn xs []
+    |> List.rev                     // need to reverse the list 
