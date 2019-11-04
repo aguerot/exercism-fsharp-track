@@ -6,5 +6,4 @@ let accumulate fn xs =
         | [] -> acc
         | head :: tail -> applyAccumulation fn tail (fn head :: acc)
 
-    applyAccumulation fn xs []
-    |> List.rev                     // need to reverse the list 
+    applyAccumulation fn xs [] |> List.rev // need to reverse the list
