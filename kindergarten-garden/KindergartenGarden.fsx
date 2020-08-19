@@ -1,11 +1,5 @@
-﻿module KindergartenGarden
-
-type Plant =
-    | Violets
-    | Radishes
-    | Grass
-    | Clover
-    | Unknown
+﻿
+type Plant = Violets | Radishes | Grass | Clover | Unknown
 
 let children =
     [ "Alice"; "Bob"; "Charlie"; "David"; "Eve"; "Fred"; "Ginny"; "Harriet"; "Ileana"; "Joseph"; "Kincaid"; "Larry" ]
@@ -25,3 +19,10 @@ let plants (diagram: string) (student: string) =
         |> Seq.collect (Seq.skip (2 * index) >> Seq.take 2)
         |> Seq.map toPlant
         |> Seq.toList
+
+let diagram = "VRCGVVRVCGGCCGVRGCVCGCGV\nVRCCCGCRRGVCGCRVVCVGCGCV"
+let student = "Bob"
+
+let res = plants diagram student
+
+printfn "%A" (plants diagram student)
